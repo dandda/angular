@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<input type="text" ng-model="name">
+	<ul>
+		<li ng-repeat="item in arr | myFilter">
+			{{item}}
+		</li>
+	</ul>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+app.controller('myCtrl', ['$scope', function($scope){
+	$scope.name = ''
+	// $scope.arr = ['tangcaiye','zhangsan','lisi']
+	$scope.arr = [2,9,32,5,4,7]
+}])	
+// 第一个是过滤器的名字，第二个参数为一个函数
+app.filter('myFilter',function (){
+	return function (arr){
+
+		function sortNumber(a,b)
+		{
+			return a - b
+		}
+		return arr.sort(sortNumber)
+	}
+})
+</script>
+</html>
+
+
+
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<input type="text" ng-model="wd">
+	<ul>
+		<li ng-repeat="item in s">
+			{{item}}
+		</li>
+	</ul>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+
+var app = angular.module("myApp",[])
+
+app.controller('myCtrl', ['$scope','$http', function($scope,$http){
+
+	$scope.wd = ""
+	$scope.s = []
+
+	$scope.$watch("wd",function (newValue){
+		$http.jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+newValue+"&cb=JSON_CALLBACK").success(function (data){
+			// console.log(data)
+			$scope.s = data.s
+		})
+	})
+
+	//百度的
+	/*$http.jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+$scope.wd+"&cb=JSON_CALLBACK").success(function (data){
+		console.log(data)
+	})*/
+}])
+
+</script>
+</html>

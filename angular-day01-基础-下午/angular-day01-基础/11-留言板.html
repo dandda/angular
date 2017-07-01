@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	姓名： <input type="text" ng-model="name"><br>	
+	内容: <textarea ng-model="content"></textarea><br>
+	<button ng-click="sub()">提交</button><br>
+	<h2>显示留言</h2>
+	<ul>
+		<li ng-repeat="item in arr">
+			<p>{{item.name}}</p>
+			<p>{{item.content}}<a href="###" ng-click="del($index)">删除</a></p>
+		</li>
+	</ul>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var myApp = angular.module("myApp",[])
+
+myApp.controller('myCtrl', ['$scope', function($scope){
+	
+	// 保存每个留言的信息
+	// {name:xx,content:xx}
+	$scope.arr = []
+	// 初始化name和content
+	$scope.name = "" 
+	$scope.content = ""
+
+	$scope.sub = function (){
+
+		// console.log($scope.name,$scope.content)
+		var obj = {
+			name: $scope.name,
+			content: $scope.content
+		}
+
+		// 向arr 里面添加一个对象
+		$scope.arr.push(obj)
+		$scope.name = ""
+		$scope.content = ""
+	}
+	$scope.del = function (index){
+
+		// console.log(index)
+		// 删除下标对应的对象
+		$scope.arr.splice(index,1)
+	}
+}])
+</script>
+</html>
+
+
+

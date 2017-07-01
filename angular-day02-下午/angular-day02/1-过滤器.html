@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<span>相乘</span>
+    <input type="text" ng-model="num1" />
+    <input type="text" ng-model="num2" /><br />
+	{{num1 * num2 | currency:"￥"}}
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+app.controller('myCtrl', ['$scope', function($scope){
+	
+
+}])	
+</script>
+</html>
+
+
+
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            width: 100%;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .waibu {
+            margin: auto;
+            width: 500px;
+            padding: 10px;
+            background-color: #ddd;
+        }
+
+        div {
+            position: relative;
+            margin-top: 10px;
+            background-color: #ccc;
+        }
+
+        #delete {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myNG">
+<div class="waibu">
+    姓名：
+    <input type="text" ng-model="name">
+    <br>
+    内容：
+    <input type="text" ng-model="content">
+    <br>
+    <button ng-click="addArr(name,content)">提交</button>
+    <div ng-repeat="ar in arr">
+        <div>{{ar.name}}</div>
+        <div>{{ar.content}}</div>
+        <button ng-click="delete($index)" id="delete">删除</button>
+    </div>
+</div>
+</body>
+<script src="js/angular.min.js"></script>
+<script>
+    angular.module("myApp", []).controller("myNG", ['$scope', function ($scope) {
+        $scope.arr = new Array();
+        $scope.addArr = function (name, content) {
+            let mliuyan = {
+                name: name,
+                content: content
+            };
+            $scope.arr[$scope.arr.length] = mliuyan;
+            console.log($scope.arr)
+        };
+        $scope.delete = function (index) {
+            $scope.arr.splice(index, 1);
+        };
+    }]);
+</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+// alert(window.navigator.userAgent)
+function goPAGE() {
+	if ((window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+		//移动端浏览
+		window.location.href="http://m.douban.com"
+	}
+	else {
+   		//桌面端
+   		alert("请用手机打开");
+   		window.location.href="http://www.douban.com"
+    }
+}
+goPAGE()
+
+
+</script>
+</html>

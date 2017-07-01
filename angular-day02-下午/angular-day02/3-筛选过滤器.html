@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<input type="text" ng-model="name">
+	<ul>
+		<li ng-repeat="item in arr | filter:name">
+			{{item}}
+		</li>
+	</ul>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+app.controller('myCtrl', ['$scope', function($scope){
+	
+	$scope.name = ""
+	$scope.arr = ['tangcaiye','zhangsan','lisi']
+}])	
+</script>
+</html>
+
+
+
+

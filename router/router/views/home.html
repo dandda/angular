@@ -1,0 +1,19 @@
+<h1 class="title">{{title}}</h1>
+<ul>
+	<li ng-repeat="item in userList">
+		姓名：
+		<a href="#/userDetail/{{item.userId}}">{{item.userName}}</a>
+	</li>
+</ul>
+<style type="text/css">
+.title{
+	color: blue;
+}	
+li{
+	font-size: 30px;
+	background-color: #ccc;
+}
+li:nth-child(odd){
+	background-color: yellow;
+}
+</style>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<input type="text" ng-model="name">
+	<ul>
+		<li ng-repeat="item in notes | filter:myFilter">
+			{{item}}
+		</li>
+	</ul>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+app.controller('myCtrl', ['$scope', function($scope){
+	$scope.notes = [{
+		text:"文章1",
+		favorite:false
+	},{
+		text:"文章2",
+		favorite:true
+	},{
+		text:"文章3",
+		favorite:false
+	}
+	];
+
+	$scope.myFilter = function (obj){
+		// obj为当前循环的对象
+		// 接受一个返回值，类型为bol，返回true->保留，false就会过滤掉
+		return !obj.favorite
+	}
+
+}])	
+/*// 第一个是过滤器的名字，第二个参数为一个函数
+app.filter('myFilter',function (){
+	return function (arr){
+
+		return arr.filter(item=>!item.favorite)
+	}
+})*/
+</script>
+</html>
+
+
+
+

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<div class="container" id="app">
+	<h1>Users</h1>
+	<hr>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>编辑</th>
+				<th>姓</th>
+				<th>名</th>
+				<th>删除</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in model">
+				<td>
+					<button class="btn btn-default" ng-click="edit($index)">
+						<span class="glyphicon glyphicon-pencil"></span>
+						编辑
+					</button>
+				</td>
+				<td>{{item.firstName}}</td>
+				<td>{{item.lastName}}</td>
+				<td>
+					<button class="btn btn-default btn-danger">
+						<span class="glyphicon glyphicon-remove-sign">
+							删除
+						</span>
+					</button>
+				</td>	
+			</tr>
+		</tbody>
+	</table>
+	<hr>
+	<button class="btn btn-default btn-success" ng-click="createUser()">
+		<span class="glyphicon glyphicon-user"></span>创建新用户
+	</button>
+	<hr>
+	<h2 ng-show="createBol">创建新用户</h2>
+	<h2 ng-hide="createBol">编辑用户</h2>
+	<form class="form-horizontal">
+		<div class="form-group">
+		    <label for="firstName" class="col-sm-1 control-label">姓：</label>
+		    <div class="col-sm-11">
+		      <input type="text" class="form-control" id="firstName" placeholder="请输入姓" ng-model="firstName">
+		    </div>
+		</div>
+		<div class="form-group">
+		    <label for="lastName" class="col-sm-1 control-label">名：</label>
+		    <div class="col-sm-11">
+		      <input type="text" class="form-control" id="lastName" placeholder="请输入名" ng-model="lastName">
+		    </div>
+		</div>
+		<div class="form-group" ng-show="createBol">
+		    <label for="pass1" class="col-sm-1 control-label">密码：</label>
+		    <div class="col-sm-11">
+		      <input type="password" class="form-control" id="pass1" placeholder="请输入密码" ng-model="pass1">
+		    </div>
+		</div>
+		<div class="form-group" ng-show="createBol">
+		    <label for="pass2" class="col-sm-1 control-label">重复密码：</label>
+		    <div class="col-sm-11">
+		      <input type="password" class="form-control" id="pass2" placeholder="请再输入密码" ng-model="pass2">
+		    </div>
+		</div>	
+	</form>
+	<hr>
+	<button class="btn btn-default btn-success" ng-click="save()" ng-disabled="editSave()">
+		<span class="glyphicon glyphicon-save"></span>保存
+	</button>
+	<br><br><br><br><br><br><br><br><br><br>
+</div>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+
+var app = angular.module("myApp",[])
+app.controller('myCtrl', ['$scope', function($scope){
+	// 激活的下标
+	var activeIndex = 0
+
+	// 原始数据
+	$scope.model = [
+		{firstName: '唐', lastName: '菜也', pass: '123'},
+		{firstName: '陈', lastName: '志鹏', pass: '321'}
+	]
+
+	// 当前是编辑还是创建,true->创建，false-》编辑
+	$scope.createBol = true
+	// 初始化
+	function init(){
+		$scope.firstName = ""
+		$scope.lastName = ""
+		$scope.pass1 = ""
+		$scope.pass2 = ""
+	}
+	init()
+
+	// 保存的处理函数
+	$scope.save = function (){
+
+		if ($scope.createBol){
+			// 添加
+			var obj = {
+				firstName: $scope.firstName,
+				lastName: $scope.lastName,
+				pass: $scope.pass1
+			}
+
+			// 添加到model里面
+			$scope.model.push(obj)
+		}else{
+			// 修改->怎么知道我要修改的下标?
+			// 通过点击编辑按钮的时候获取
+			// console.log(activeIndex)
+
+			$scope.model[activeIndex].firstName = $scope.firstName
+			$scope.model[activeIndex].lastName = $scope.lastName
+		}
+		init()
+	}
+
+	// 用于验证输入的内容
+	$scope.editSave = function (){
+
+		// console.log($scope.firstName, $scope.lastName, $scope.pass1, $scope.pass2)
+		if ($scope.createBol){
+			// 创建
+			// 只对创建进行验证
+			return !($scope.firstName != "" && $scope.lastName != "" && $scope.pass1 != "" && $scope.pass1 == $scope.pass2)
+		}else{
+			// 编辑
+			return !($scope.firstName != "" && $scope.lastName != "")
+		}
+	}
+	// 编辑的处理 index=$index
+	$scope.edit = function (index){
+
+		// 切换到编辑
+		$scope.createBol = false
+		// 更改激活的下标
+		activeIndex = index
+
+		// 通过index下标获取对应的数据
+		var obj = $scope.model[index]
+
+		// 赋值给firstName和lastName
+		$scope.firstName = obj.firstName
+		$scope.lastName = obj.lastName
+	}
+
+	// 创建新用户
+	$scope.createUser = function (){
+
+		init()
+
+		$scope.createBol = true
+	}
+}])
+
+
+
+
+
+
+
+
+	
+</script>
+</html>

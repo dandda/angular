@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body ng-app="" ng-init="showBol=false">
+	<!-- 点击的时候将showBol的值取非 -->
+	<button ng-mouseover="showBol=true" ng-mouseout="showBol=false">移动切换</button>
+	<!-- 因为该div依赖了showBol这个变量，当showBol这个变量发生改变的时候，该div也会重新渲染，不需要手动dom操作 -->
+	<div ng-show="showBol">我是一个div</div>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+</html>
+
+
+

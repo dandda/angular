@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+</head>
+<!-- 在body范围内就交给angualr -->
+<!-- ng-init: 可以初始化一些变量，然后在表达式中调用 -->
+<body ng-app="" ng-init="num1=4; num2=2">
+	<!-- 表达式：调用变量，进行一些简单的运算 -->
+	<div>{{3*2}}</div>
+	<div>{{3>2?"大":"小"}}</div>
+	<div>{{num1 * num2}}</div>
+	<!-- ng-model:双向数据绑定 -->
+	<!-- 数据驱动：只要数据发生变化，依赖这个数据的内容都会自动刷新(不需要操作DOM) -->
+	<input type="text" ng-model="num1">
+	<div>{{num1 - 2}}</div>
+</body>
+</html>
+
+
+

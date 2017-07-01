@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<style type="text/css">
+	.table-self{
+		margin-top: 80px;
+	}
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div class="container">
+		<h1>{{model.user}}代办事项
+			<span class="label label-default" ng-class="{true:'label-warning',false:'label-success'}[count()>2]">{{count()}}</span>
+		</h1>
+		<hr>
+		<div class="input-group">
+	      <input type="text" class="form-control" placeholder="添加任务" ng-model="todo">
+	      <span class="input-group-btn">
+	        <button class="btn btn-default btn-success" type="button" ng-click="add()">添加</button>
+	      </span>
+	    </div><!-- /input-group -->
+	    <table class="table table-striped table-self">
+			<tr>
+				<th>详细内容</th>
+				<th>是否完成</th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr ng-repeat="item in model.items | myFilter">
+				<td>{{item.action}}</td>
+				<td><input type="checkbox" ng-model="item.done"></td>
+				<td>{{item.done}}</td>
+				<td>
+					<button class="btn btn-default" ng-click="del(item)">删除</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+app.controller('myCtrl', ['$scope', function($scope){
+	
+	$scope.model = {
+		user:'伍涛',
+		items:[{action:"买牙膏",done:false},
+			{action:"给张三发邮件",done:false},
+			{action:"给李四打电话",done:true},
+			{action:"还信用卡",done:false}]
+	}
+	// 初始化todo的值
+	$scope.todo = ""
+
+	// 添加一条todo
+	$scope.add = function (){
+
+		var obj = {
+			action: $scope.todo,
+			done: false
+		}
+		$scope.model.items.push(obj)
+	}
+	// 获取为完成任务的数量
+	$scope.count = function (){
+		return $scope.model.items.filter(item=>!item.done).length
+	}	
+
+	$scope.del = function (item){
+		// item-》$scope.model.items的下标
+		/*var items = $scope.model.items
+		for (var i=0; i<items.length; i++){
+			if (items[i] == item){
+				items.splice(i,1)
+				break
+			}
+		}*/
+		var items = $scope.model.items
+		items.splice(items.indexOf(item),1)
+		/*console.log(index,$scope.model.items)
+		$scope.model.items.splice(index,1)*/
+	}
+
+	/*$scope.myFilter = function (item){
+
+		return !item.done
+	}*/
+}])	
+
+app.filter("myFilter",function (){
+
+	return function (arr){
+
+		return arr.filter(item=>!item.done)
+	}
+})
+</script>
+</html>
+
+
+
+
+
+
+

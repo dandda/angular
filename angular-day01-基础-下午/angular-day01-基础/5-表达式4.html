@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+	.font12{
+		font-size: 12px;
+		color: red;
+	}
+	.font14{
+		font-size: 14px;
+		color: green;
+	}
+	.font16{
+		font-size: 16px;
+		color: yellow;
+	}
+	.font18{
+		font-size: 18px;
+		color: blue;
+	}
+	.b1{
+		border: 1px solid black;
+	}
+	</style>
+</head>
+<!-- 在body范围内就交给angualr -->
+<!-- ng-init: 可以初始化一些变量，然后在表达式中调用 -->
+<!-- ng-init:初始化的变量，就是js的变量 -->
+<body ng-app="" ng-init="fontClass='14'">
+	<!-- 动态的更改class -->
+	<!-- [fontClass]中括号的内容会跟对象中的键进行判断，如果条件成立就返回对应的值 -->
+	<!-- 如果是固定的class就放在class中 -->
+	<div class="b1" ng-class="{'12':'font12','14':'font14','16':'font16','18':'font18'}[fontClass]">我是一个div</div>
+</body>
+</html>
+
+
+

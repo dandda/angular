@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body ng-app="" ng-init="arr=[3,9,5,5,15]">
+	<ul>
+		<!-- ng-repeat循环标签,item为数组的元素 -->
+		<!-- (index,item)index为下标，item是数组元素 -->
+		<!-- 如果数组中有重复内容的话加track by $index -->
+		<li ng-repeat="(index,item) in arr track by $index">
+			内容是：{{item}},下标是：{{index}}
+		</li>
+	</ul>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+</html>
+
+
+

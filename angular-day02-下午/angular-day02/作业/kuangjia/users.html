@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        .add {
+            display: block;
+        }
+
+        .noadd {
+            display: none;
+        }
+        .pidding_0{
+            float: right;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myNG">
+<div class="container" id="app">
+    <h1>Users</h1>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>编辑</th>
+            <th>姓</th>
+            <th>名</th>
+            <th>删除</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td>
+                <button class="btn btn-default" ng-click="setUser($index)">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    编辑
+                </button>
+            </td>
+            <td>{{user.xin}}</td>
+            <td>{{user.min}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteUser($index)">
+                    <span></span>
+                    删除
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <button class="btn btn-default btn-success" ng-click="newUser()">
+        <span class="glyphicon glyphicon-user"></span>创建新用户
+    </button>
+    <hr>
+    <h2>{{jiemian == 1 ? cj : bj}}</h2>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="firstName" class="col-sm-1 control-label">姓：</label>
+            <div class="col-sm-11">
+                <input type="text" class="form-control" id="firstName" placeholder="请输入姓" ng-model="xin">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName" class="col-sm-1 control-label">名：</label>
+            <div class="col-sm-11">
+                <input type="text" class="form-control" id="lastName" placeholder="请输入名" ng-model="min">
+            </div>
+        </div>
+        <div class="form-group" ng-class="jiemian == 1 ? 'add' : 'noadd'">
+            <label for="pass1" class="col-sm-1 control-label">密码：</label>
+            <div class="col-sm-11">
+                <input type="text" class="form-control" id="pass1" placeholder="请输入密码" ng-model="pwd">
+            </div>
+        </div>
+        <div class="form-group" ng-class="jiemian == 1 ? 'add' : 'noadd'">
+            <label for="pass2" class="col-sm-1 control-label">重复密码：</label>
+            <div class="col-sm-11">
+                <input type="text" class="form-control" id="pass2" placeholder="请再输入密码" ng-model="pwd1">
+            </div>
+        </div>
+    </form>
+    <hr>
+    <button class="btn btn-default btn-success" ng-click="addUser(xin,min,pwd)"
+            ng-disabled="getDisabled(xin, min, pwd, pwd1)">
+        <span class="glyphicon glyphicon-save"></span>{{jiemian == 1 ? baochun : bianji}}
+    </button>
+    <br>
+    <br>
+    <br>
+</div>
+</body>
+<script type="text/javascript">
+    angular.module("myApp", []).controller("myNG", ['$scope', function ($scope) {
+        // 界面-》用于控制显示编辑还是创建
+        $scope.jiemian = 1;
+        $scope.mIndex = 0;
+        $scope.cj = "创建新用户";
+        $scope.bj = "编辑用户";
+        $scope.baochun = "保存用户";
+        $scope.bianji = "编辑用户";
+        //user数组
+        $scope.users = new Array();
+        //init
+        $scope.xin, $scope.min, $scope.pwd, $scope.pwd1 = "";
+        //创建用户按钮
+        $scope.newUser = function () {
+            $scope.xin = "";
+            $scope.min = "";
+            $scope.pwd = "";
+            $scope.pwd1 = "";
+            $scope.jiemian = 1;
+        };
+        //添加
+        $scope.addUser = function (xin, min, pwd) {
+            if ($scope.jiemian == 1) {
+                $scope.users[$scope.users.length] = {
+                    xin: xin,
+                    min: min,
+                    pwd: pwd
+                };
+            } else {
+                // 编辑
+//                console.log($scope.mIndex);
+                $scope.users[$scope.mIndex].xin = $scope.xin;
+                $scope.users[$scope.mIndex].min = $scope.min;
+            }
+            $scope.newUser();
+        };
+        //删除
+        $scope.deleteUser = function (index) {
+            $scope.users.splice(index, 1)
+        };
+        //判断是否可以注册
+        $scope.getDisabled = function (xin, min, pwd, pwd1) {
+            if ($scope.jiemian == 1) {
+                if (xin != "" && min != "" && pwd != "" && pwd == pwd1)
+                    return false;
+                return true;
+            } else {
+                if (xin != "" && min != "")
+                    return false;
+                return true;
+            }
+        };
+        //编辑
+        $scope.setUser = function (index) {
+            $scope.jiemian = 0;
+            $scope.mIndex = index;
+            $scope.xin = $scope.users[index].xin;
+            $scope.min = $scope.users[index].min;
+        };
+    }]);
+</script>
+</html>

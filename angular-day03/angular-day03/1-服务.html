@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	{{msg}}	<br>
+	数字：{{num}}
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+
+app.controller('myCtrl', ['$scope','$timeout','$interval', function($scope,$timeout,$interval){
+		
+	$scope.msg = "hello ng"
+	$scope.num = 1
+	$timeout(function (){
+		// alert('timeout')
+		$scope.msg = "hello 育知"
+	},2000)
+	var timer = $interval(function (){
+
+		$scope.num++
+		if ($scope.num > 5){
+			$interval.cancel(timer)
+		}
+	},1000)
+	/*setTimeout(function (){
+		$scope.msg = "hello 育知"
+	},2000)*/
+}])
+
+</script>
+</html>

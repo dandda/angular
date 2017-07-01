@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<span>相乘</span>
+    <input type="text" ng-model="num1" />
+    <input type="text" ng-model="num2" /><br />
+	{{24 | selfCurrency}}
+	{{num1 * num2 | selfCurrency}}
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+app.controller('myCtrl', ['$scope', function($scope){
+
+}])	
+// 第一个是过滤器的名字，第二个参数为一个函数
+app.filter('selfCurrency',function (){
+	return function (arg){
+		
+		return "￥"+arg
+	}
+})
+</script>
+</html>
+
+
+
+

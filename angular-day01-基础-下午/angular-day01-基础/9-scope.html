@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<!-- 使用num1 -->
+	<!-- {{arr[2]}} -->
+	<ul>
+		<li ng-repeat="item in arr">
+			{{item}}
+		</li>
+	</ul>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+// 1.创建一个模块叫MyApp
+// 第一个参数为模块的名称，第二参数是一个数组,所依赖的模块
+var myApp = angular.module("myApp",[])
+
+// 2.设置controller->mvc(model(数据)-view(视图)-controller(控制器))->mvvm
+// 第一个参数定义的是控制器的名字
+// 依赖注入,1.声明你要使用的模块（功能）, 2.在function 中调用对应的模块
+myApp.controller('myCtrl', ['$scope', function($scope){
+	
+	// $scope->angular作用域
+	// 就是在angular的作用域下声明了一个变量为num,值为4
+	// 如果你想让一个变量，在view层调用的话，就把它放到$scope下
+	$scope.arr = [3,5,9,13];
+	// var xx
+}])
+</script>
+</html>
+
+
+

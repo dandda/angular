@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+/*function succ(json){
+	console.log(json)
+}*/
+
+var app = angular.module("myApp",[])
+
+app.controller('myCtrl', ['$scope','$http', function($scope,$http){
+	
+	$http.jsonp("http://127.0.0.1/1702/angular-day03/jsonp_server.php?callback=JSON_CALLBACK").success(function (json){
+		console.log(json)
+	})
+}])
+
+</script>
+</html>

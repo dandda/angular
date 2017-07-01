@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<style type="text/css">
+	html,body, #app {
+	  height: 100%;
+	}
+	#toolbar {
+	  float: left;
+	  width: 80px;
+	  height: 100%;
+	  background-color: #30414D;
+	  color: #767676;
+	  padding: 35px 25px 25px 25px;
+	}
+	#toolbar i {
+	  font-size: 30px;
+	  margin-bottom: 35px;
+	  cursor: pointer;
+	  opacity: 0.8;
+	  transition: opacity 0.5s ease;
+	}
+
+	#toolbar i:hover {
+	  opacity: 1;
+	}
+	#toolbar i.active{
+		color: #F7AE4F;
+	}
+	#notes-list {
+	  float: left;
+	  width: 300px;
+	  height: 100%;
+	  background-color: #F5F5F5;
+	  font-family: 'Raleway', sans-serif;
+	  font-weight: 400;
+	}
+
+	#list-header {
+	  padding: 5px 25px 25px 25px;
+	}
+
+	#list-header h2 {
+	  font-weight: 300;
+	  text-transform: uppercase;
+	  text-align: center;
+	  font-size: 22px;
+	  padding-bottom: 8px;
+	}
+
+	#notes-list .container {
+	  height: calc(100% - 137px);
+	  max-height: calc(100% - 137px);
+	  overflow: auto;
+	  width: 100%;
+	  padding: 0;
+	}
+
+	#notes-list .container .list-group-item {
+	  border: 0;
+	  border-radius: 0;
+	}
+	#note-editor {
+	  height: 100%;
+	  margin-left: 380px;
+	}
+
+	#note-editor textarea {
+	  height: 100%;
+	  border: 0;
+	  border-radius: 0;
+	}
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<div id="app">
+	<div id="toolbar">
+	    <i class="glyphicon glyphicon-plus" ng-click="addNote()"></i>
+	    <i class="glyphicon glyphicon-star" ng-class="{true:'active',false:''}[activeNote.bol]" ng-click="changeBol()"></i>
+	    <i class="glyphicon glyphicon-remove"></i>
+	</div>
+	<div id="notes-list">
+    <div id="list-header">
+      <h2>Notes</h2>
+      <div class="btn-group btn-group-justified" role="group">
+        <!-- All Notes button -->
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default" ng-class="{true:'active',false:''}[allBol]" ng-click="allBol=true">
+            All Notes
+          </button>
+        </div>
+        <!-- Favorites Button -->
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default" ng-class="{true:'',false:'active'}[allBol]" ng-click="allBol=false">
+            Favorites
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- render notes in a list -->
+    <div class="container">
+      <div class="list-group">
+        <a class="list-group-item" href="#" ng-repeat="item in notes | filter:myFilter" ng-class="{true:'active',false:''}[activeNote==item]">
+          <h4 class="list-group-item-heading" ng-click="changeNote(item)">
+            {{item.text}}
+          </h4>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div id="note-editor">
+    <textarea class="form-control" ng-model="activeNote.text"></textarea>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+app.controller('myCtrl', ['$scope', function($scope){	
+	
+	// 存放所有的note
+	/*
+	{
+		text: 文本内容
+		bol: 是否加星（收藏）
+	}
+	*/
+	$scope.notes = []
+
+	// 保存激活的对象,而不是下标
+	$scope.activeNote = {}
+
+	// 标明现在是显示所有的还是收藏的列表
+	// true显示所有,false->显示收藏的列表
+	$scope.allBol = true
+
+	// 添加一条新的note
+	$scope.addNote = function (){
+
+		var obj = {
+			text: "new Note",
+			bol: false
+		}
+		$scope.notes.push(obj)
+		// 把新创建的对象赋值给activeNote
+		$scope.activeNote = obj
+	}
+
+	// 更改激活的对象
+	$scope.changeNote = function (obj){
+
+		// 将传过来的对象赋值给activeNote
+		$scope.activeNote = obj
+	}
+
+	// 切换收藏
+	$scope.changeBol = function (){
+
+		$scope.activeNote.bol = !$scope.activeNote.bol
+	}
+
+	// 过滤
+	$scope.myFilter = function (obj){
+
+		if ($scope.allBol){
+			return true
+		}else{
+			// true->保留，false->不保留
+			return obj.bol	
+		}
+	}
+}])
+
+
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Notes</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body ng-app="myApp" ng-controller="myCtrl">
+		<div id="warp">
+			<!--深蓝色部分-->
+			<div id="toolbar">
+				<i class="glyphicon glyphicon-plus" ng-click="makeNote()"></i>
+				<i class="glyphicon glyphicon-star" ng-click="collectNote()" ng-class="{true:'changecolor'}[pitchnotes.save]"></i>
+				<i class="glyphicon glyphicon-remove" ng-click="del()"></i>
+			</div>
+			<div id="notes-list">
+				<div id="list-header">
+					<h2>Notes | coligo</h2>
+					<div class="btn-group btn-group-justified" role="group">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-default" ng-class="{true:'active'}[all=='true']" ng-click="all='true'">
+           		 All Notes
+          </button>
+						</div>
+						<div class="btn-group" role="group">
+							 <button type="button" ng-click="all='collect'" class="btn btn-default" ng-class="{true:'active'}[all=='collect']">
+            Favorites
+          </button>
+						</div>
+					</div>
+				</div>
+				<!--灰色部分-->
+				<div class="container">
+					<div class="list-group">
+						<a class="list-group-item active" ng-class="{true:'active'}[pitchnotes==item]"     ng-click="pitchYou(item)" href="#" ng-repeat="item in model.items | filter:collecList">
+							<h4 class="list-group-item-heading">{{item.notes}}</h4>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="note-editor">
+				<textarea class="form-control" ng-model="pitchnotes.notes">
+            </textarea>
+			</div>
+		</div>
+
+		<div id="qq-sendUrl-btn"></div>
+		<div id="qb-sougou-search" style="display: none; opacity: 0; left: 143.5px; top: 62px;">
+			<p>搜索</p>
+			<p class="last-btn">复制</p>
+			<iframe src=""></iframe>
+		</div>
+	</body>
+	<script type="text/javascript" src="libs/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module("myApp", []);
+		app.controller("myCtrl", function($scope) {
+			$scope.model = {
+				items: [] //生成一个对象，里面放一个空数组。
+			}
+
+			$scope.pitchnotes = {}; //存放选中笔记
+			
+			$scope.all= 'true';
+
+			var items = $scope.model.items;
+			//给items数据塞新的对象
+			$scope.makeNote = function() {
+				$scope.tile = "New note";
+				$scope.save = false;
+				var obj = {
+					notes: $scope.tile,
+					save: $scope.save,
+				}
+
+				$scope.pitchnotes = obj;
+				$scope.model.items.push(obj);
+			}
+
+			$scope.pitchYou = function(item) {
+				$scope.pitchnotes = item;
+			}
+
+			$scope.collectNote = function() {
+				$scope.pitchnotes.save = !$scope.pitchnotes.save;
+			}
+
+			$scope.collecList = function(item) {
+				if($scope.all == 'true') {
+					return true;
+				} else {
+					return item.save;
+				}
+			}
+
+			$scope.del = function() {
+				// 获取下标
+				var pitchIndex = $scope.model.items.indexOf($scope.pitchnotes);
+				$scope.model.items.splice(pitchIndex, 1);
+				$scope.pitchnotes = $scope.model.items[0]; //选中第一个
+			}
+
+		})
+	</script>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script type="text/javascript" src="angular.min.js"></script>
+    <style>
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl"ng-init="hide=3">
+<div class="container" id="app">
+    <h1>Users</h1>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>编辑</th>
+            <th>姓</th>
+            <th>名</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in list">
+                <th>
+                    <button class="btn btn-default" ng-click="revamp($index)">
+                        编辑
+                    </button>
+                </th>
+                <th>{{item.surname}}</th>
+                <th>{{item.name}}</th>
+                <th>
+                    <button class="btn btn-default btn-danger" ng-hide="{'1':true,'2':false,'3':true}[hide]" ng-click="del($index)">
+                        删除
+                    </button>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <!--点击改变hide的值使创建部分和修改部分隐藏或显示-->
+    <button ng-click="showCreat()" class="btn btn-default btn-success">
+        创建新用户
+    </button>
+    <hr>
+    <div ng-hide="{'1':false,'2':true,'3':true}[hide]">
+        <h2>创建新用户</h2>
+        <form class="form-horizontal"  name="myForm">
+            <div class="form-group">
+                <label for="lastName" class="col-sm-1 control-label">姓：</label>
+                <div class="col-sm-11">
+                    <input type="text"class="form-control"ng-model="surname"placeholder="请输入姓"name="surname"required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="col-sm-1 control-label">名：</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control"ng-model="name" id="lastName" placeholder="请输入名"required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pass1" class="col-sm-1 control-label">密码：</label>
+                <div class="col-sm-11">
+                    <input type="password" class="form-control" id="pass1"ng-model="pass" placeholder="请输入密码"required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pass2" class="col-sm-1 control-label">重复密码：</label>
+                <div class="col-sm-11">
+                    <input type="password" class="form-control" id="pass2"ng-model="pass2"placeholder="请再输入密码" required>
+                </div>
+            </div>
+            <hr>
+            <button class="btn btn-default btn-success"ng-click="creat()" ng-disabled="myForm.$invalid">
+                保存
+            </button>
+            <!--button的默认行为会导致报错-->
+            <!--<button class="btn btn-default btn-warning "ng-click="exit()">-->
+                <!--取消-->
+            <!--</button>-->
+            <input type="reset"value="取消" class="btn btn-default btn-warning "ng-click="exit()">
+        </form>
+    </div>
+    <div ng-hide="{'1':true,'2':false,'3':true}[hide]">
+        <h2>修改用户</h2>
+        <form class="form-horizontal" name="yourForm">
+            <div class="form-group">
+                <label for="lastName" class="col-sm-1 control-label">姓：</label>
+                <div class="col-sm-11">
+                    <input type="text"class="form-control"ng-model="resurname">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="col-sm-1 control-label">名：</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control"ng-model="rename" placeholder="请输入名">
+                </div>
+            </div>
+            <hr>
+            <button class="btn btn-default btn-success"ng-click="subRevamp()"ng-disabled="yourForm.$pristine">
+                确认修改
+            </button>
+            <button class="btn btn-default btn-warning"ng-click="exit()">
+                取消
+            </button>
+
+        </form>
+    </div>
+
+</div>
+<script>
+    var myApp =angular.module("myApp",[]);
+//    输入控制器名
+    myApp.controller('myCtrl',
+    function ($scope) {
+//这是作为数据的数组
+        $scope.list=[
+            {surname:"宋 ",name:"江"},
+            {surname:"柯 ",name:"平"}
+        ]
+//        创建数组
+        $scope.showCreat=function () {
+            if( $scope.hide!=3)return;
+                $scope.hide=1
+        }
+        $scope.creat=function () {
+            var obj={
+                surname:$scope.surname,
+                name:$scope.name
+            }
+            $scope.list.push(obj);
+            $scope.surname="";
+            $scope.name="";
+            $scope.pass="";
+            $scope.pass2="";
+            $scope.hide=3;
+        };
+//        修改时将对应编辑的数据拿出来显示
+        var sub;
+        $scope.revamp=function(index) {
+            if($scope.hide!=3)return;
+            $scope.hide=2;
+            $scope.resurname=$scope.list[index].surname;
+            $scope.rename=$scope.list[index].name;
+            sub = index;
+        };
+//    确认修改
+        $scope.subRevamp=function () {
+            $scope.hide=3;
+            $scope.list[sub].surname=$scope.resurname;
+            $scope.list[sub].name=$scope.rename;
+        };
+        $scope.exit=function () {
+//            $scope.surname="";设置reset按钮 可以不用四项初始化
+//            $scope.name="";
+//            $scope.pass="";
+//            $scope.pass2="";
+            $scope.hide=3;
+        };
+        $scope.del=function (index) {
+            if($scope.list.length==1) return;
+            $scope.list.splice(index,1);
+        }
+    })
+
+</script>
+</body>
+</html>

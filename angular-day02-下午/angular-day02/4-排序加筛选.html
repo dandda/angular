@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<input type="text" ng-model="key">
+	<ul>
+		<!-- 根据item中的age进行排序 -->
+		<!-- 根据key的值进行筛选，然后再根据item中的age属性进行排序 -->
+		<li ng-repeat="item in friends | filter:key | orderBy:'age':true">
+			{{item.name}}
+		</li>
+	</ul>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+app.controller('myCtrl', ['$scope', function($scope){
+	
+	$scope.key = ""
+	$scope.friends = [{name:'John', phone:'555-1212', age:21},
+           {name:'Mary', phone:'555-9876', age:19},
+           {name:'Mike', phone:'555-4321', age:10},
+           {name:'Adam', phone:'555-5678', age:35},
+           {name:'Julie', phone:'555-8765', age:29}];
+
+}])	
+</script>
+</html>
+
+
+
+

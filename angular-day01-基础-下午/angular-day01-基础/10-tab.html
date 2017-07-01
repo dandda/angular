@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#tabWrap button.active{
+		background-color: yellow;
+	}
+	#tabWrap div{
+		width: 200px;
+		height: 200px;
+		background-color: #ccc;
+		display: none;
+	}
+	#tabWrap div.active{
+		display: block;
+	}
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div id="tabWrap">
+		<!-- 生成结构，并动态修改class -->
+		<!-- $index==activeIndex是一个条件，返回bol值，然后跟对象中的键名进行比较,如果成立返回对应的值 -->
+		<button ng-repeat="item in tabs" ng-class="{true:'active',false:''}[$index==activeIndex]" ng-click="changeIndex($index)">
+			{{item.btn}}
+		</button>
+		<div ng-repeat="item in tabs" ng-class="{true:'active',false:''}[$index==activeIndex]">
+			{{item.content}}
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var myApp = angular.module("myApp",[])
+
+myApp.controller('myCtrl', ['$scope', function($scope){
+	// model->服务器返回的数据
+	$scope.tabs = [
+		{btn:"按钮1", content: "买菜", id:1},
+		{btn:"按钮2", content: "学习ng",id:2},
+		{btn:"按钮3", content: "打游戏",id:3}
+	];
+	// 激活的下标
+	$scope.activeIndex = 0;
+
+	// 改变激活的下标
+	$scope.changeIndex = function (index){
+		// console.log(index)
+		// 接收传过来的index并修改activeIndex
+		$scope.activeIndex = index;
+	}
+}])
+</script>
+</html>
+
+
+

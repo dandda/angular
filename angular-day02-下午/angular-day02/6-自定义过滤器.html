@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	{{'HelloWorld' | myFilter}}
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+app.controller('myCtrl', ['$scope', function($scope){
+
+}])	
+// 第一个是过滤器的名字，第二个参数为一个函数
+app.filter('myFilter',function (){
+	return function (arg){
+
+		// return arg.toUpperCase()
+		return arg.toLowerCase()
+	}
+})
+</script>
+</html>
+
+
+
+

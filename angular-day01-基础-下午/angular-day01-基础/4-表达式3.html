@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<style type="text/css">
+	.show{
+		display: block;
+	}
+	.hide{
+		display: none;
+	}
+	</style>
+</head>
+<!-- 在body范围内就交给angualr -->
+<!-- ng-init: 可以初始化一些变量，然后在表达式中调用 -->
+<!-- ng-init:初始化的变量，就是js的变量 -->
+<body ng-app="" ng-init="showBol=false">
+	<!-- 动态的更改class -->
+	<!-- 判断showBol的值,如果为正就返回show,如果false就返回hide -->
+	<div ng-class="{true:'show',false:'hide'}[showBol]">我是一个div</div>
+</body>
+</html>
+
+
+

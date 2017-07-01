@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#tabWrap button.active{
+		background-color: yellow;
+	}
+	#tabWrap div{
+		width: 200px;
+		height: 200px;
+		background-color: #ccc;
+		display: none;
+	}
+	#tabWrap div.active{
+		display: block;
+	}
+	</style>
+</head>
+<body>
+	<!-- <button>按钮1</button>
+	<button>按钮2</button>
+	<button>按钮3</button>
+	<div>买菜</div>
+	<div>学习ng</div>
+	<div>打游戏</div> -->
+	<div id="tabWrap"></div>
+</body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+// 1.从服务器拿了一些数据
+var tabs = [
+	{btn:"按钮1", content: "买菜", id:1},
+	{btn:"按钮2", content: "学习ng",id:2},
+	{btn:"按钮3", content: "打游戏",id:3}
+];	
+
+// 激活的下标
+var activeIndex = 0;
+
+// 生成结构
+for (var i=0; i<tabs.length; i++){
+
+	var btnObj = $("<button>"+tabs[i].btn+"</button>")
+	$("#tabWrap").append(btnObj)
+	if (i == activeIndex){
+		btnObj.addClass('active')
+	}
+}
+for (var i=0; i<tabs.length; i++){
+	var contentObj = $("<div>"+tabs[i].content+"</div>")
+	$("#tabWrap").append(contentObj)
+	if (i == activeIndex){
+		contentObj.addClass('active')
+	}
+}
+
+$("#tabWrap>button").on("click",function (){
+	var index = $("#tabWrap>button").index($(this));
+	activeIndex = index;
+	$("#tabWrap>button").removeClass('active');
+	$("#tabWrap>div").removeClass('active');
+	$("#tabWrap>button").eq(activeIndex).addClass("active")
+	$("#tabWrap>div").eq(activeIndex).addClass("active")
+})
+</script>
+</html>
+
+
+
+
+
+
+
+
+

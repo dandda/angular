@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("myApp",[])
+
+app.controller('myCtrl', ['$scope','$http', function($scope,$http){
+	
+	/*
+	1.ajax必须要在服务器环境下运行，
+	2.只能请求本域名下的地址
+	*/
+	$http.get("http://127.0.0.1/1702/angular-day03/server.php").success(function (data){
+		console.log(data)
+	})
+}])
+
+</script>
+</html>

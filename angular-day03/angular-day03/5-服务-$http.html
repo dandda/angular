@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<input type="text" ng-model="wd" ng-change="sendFn()">
+	<ul>
+		<li></li>
+	</ul>
+</body>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript">
+
+var app = angular.module("myApp",[])
+
+app.controller('myCtrl', ['$scope','$http', function($scope,$http){
+
+	$scope.wd = ""
+
+	$scope.sendFn = function (){
+		// console.log($scope.wd)
+		$http.jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+$scope.wd+"&cb=JSON_CALLBACK").success(function (data){
+			console.log(data)
+		})
+	}
+
+	//百度的
+	/*$http.jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+$scope.wd+"&cb=JSON_CALLBACK").success(function (data){
+		console.log(data)
+	})*/
+}])
+
+</script>
+</html>
