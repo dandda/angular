@@ -32,3 +32,14 @@ abbr,acronym { border: 0;
 a{
 	text-decoration: none;
 }
+var,em{
+	font-style: normal;
+}
+.nowrap{
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+}
+
+
+

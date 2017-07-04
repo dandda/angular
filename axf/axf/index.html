@@ -16,13 +16,13 @@
 		</div>
 		<span class="search">搜索</span>
 	</header>
-	<div ng-view></div>
+	<div class="router-view" ng-view></div>
 	<nav>
-		<a href="#/" class="home active">
+		<a href="#/" class="home" ng-class="{true:'active'}[navActiveIndex==0]" ng-click="navActiveIndex=0">
 			<span>&nbsp;</span>
 			首页
 		</a>
-		<a href="#/category" class="current">
+		<a href="#/category" class="current" ng-class="{true:'active'}[navActiveIndex==1]" ng-click="navActiveIndex=1">
 			<span>&nbsp;</span>
 			闪送超市
 		</a>

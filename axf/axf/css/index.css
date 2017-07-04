@@ -14,7 +14,7 @@ html{
 	top: 0;
 	bottom: 0;
 	padding-top: 4.5rem;
-	background-color: #e5e5e5;
+	background-color: #f6f6f6;
 }
 .swiper-container{
 	width: 100%;
@@ -24,6 +24,7 @@ header{
 	top: 0;
 	width: 100%;
 	height: 4.5rem;
+	z-index: 3;
 	background-color: #ffd600;
 }
 .header-content{
@@ -181,6 +182,13 @@ nav>a.current.active>span{
 	font-size: 1.2rem;
 	display: block;
 	margin-top: 0.5rem;
+}
+.router-view{
+	/*height: 100%;*/
+	position: absolute;
+	top: 4.5rem;
+	bottom: 5rem;
+	width: 100%;
 }
 
 

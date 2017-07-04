@@ -1,0 +1,127 @@
+<main>
+	<div class="swiper-container">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide" ng-repeat="item in slide">
+	        	<img src="{{item.activity.img}}" alt="">
+	        </div>
+	    </div>
+	    <!-- 如果需要分页器 -->
+	    <div class="swiper-pagination"></div>
+	</div>
+	<div class="acts-icon">
+		<a href="###" ng-repeat="item in menu">
+			<img src="{{item.activity.img}}" alt="">
+			<span>{{item.activity.name}}</span>
+		</a>
+	</div>
+	<ul class="acts-category">
+		<li class="acts-category-item">
+			<div class="acts-category-title">
+				<span>热卖商品</span>
+				<a href="#/category">更多&gt;</a>
+			</div>
+			<img class="category-item-banner" src="./images/category-item-banner.jpg" alt="">
+			<ul class="acts-category-item-goodsList">
+				<li ng-repeat="item in homehot">
+					<img src="{{item.img}}" alt="">
+					<p class="category-name">{{item.name}}</p>
+					<div class="product-specifics">
+						<div class="product-specifics-left">
+							<p>{{item.specifics}}</p>
+							<p>￥{{item.price}}</p>
+						</div>
+						<div class="product-specifics-right">+</div>
+					</div>
+				</li>
+			</ul>
+			<br><br><br><br><br>
+		</li>
+	</ul>
+</main>
+<style type="text/css">
+.acts-category-item{
+	background-color: #fff;
+	padding: 1.4rem 0.9rem;
+}	
+.acts-category-title{
+	overflow: hidden;
+}
+.acts-category-title>span{
+	float: left;
+	border-left: 0.8rem solid #eb4084;
+	color: #eb4084;
+	text-indent: 0.6rem;
+	font-size: 1.4rem;
+}
+.acts-category-title>a{
+	float: right;
+	color: #a6a6a6;
+	font-size: 1.3rem;
+}
+.category-item-banner{
+	width: 100%;
+	margin: 0.9rem 0;
+}
+.acts-category-item-goodsList{
+	overflow: hidden;
+}
+.acts-category-item-goodsList>li{
+	width: 31.33333%;
+	padding: 0 1%;
+	float: left;
+	text-align: center;
+	font-size: 1.2rem;
+}
+.acts-category-item-goodsList>li:nth-child(3n-1){
+	border-left: 0.1rem solid #e5e5e5;
+	border-right: 0.1rem solid #e5e5e5;
+	box-sizing: border-box;
+}
+.acts-category-item-goodsList>li>img{
+	width: 7.4rem;
+	height: 7.4rem;
+}
+.product-specifics{
+	overflow: hidden;
+	margin-top: 3rem;
+}
+.product-specifics-left{
+	float: left;
+	text-align: left;
+}
+.product-specifics-right{
+	float: right;
+	width: 3rem;
+	height: 3rem;
+	border: 0.1rem solid #dee0dd;
+	border-radius: 50%;
+	font-size: 2rem;
+	color: #ff3910;
+	text-align: center;
+	line-height: 3rem;
+}
+.product-specifics-left>p:nth-child(1){
+	color: #acacac;
+}
+.product-specifics-left>p:nth-child(2){
+	color: #e44619;
+}
+.category-name{
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+	vertical-align: top;
+	text-align: -webkit-match-parent;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
