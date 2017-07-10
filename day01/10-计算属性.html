@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p>原始的：{{message}}</p>
+		<p>翻转的：{{reversedMessage}}</p>
+	</div>
+</body>
+<script type="text/javascript">
+
+	// 父组件
+	var vm = new Vue({
+		el:"#app",
+		data:{
+			message:"Hello Vue"
+		},
+		methods: {
+			/*reversedMessage:function (){
+
+				return this.message.split("").reverse().join("")
+			}*/
+		},
+		// 计算属性
+		computed:{
+			// 初始会调用该方法返回一个值并赋值给reversedMessage属性，之后再调用的时候就直接返回属性值，而不调用函数
+			reversedMessage:function (){
+
+				return this.message.split("").reverse().join("")
+			}
+		}
+	})
+
+
+
+
+
+
+
+
+</script>
+</html>

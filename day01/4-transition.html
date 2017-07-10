@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style type="text/css">
+	.div1{
+		width: 200px;
+		height: 200px;
+		background-color: #ccc;
+		font-size: 50px;
+	}
+	.fade-enter-active, .fade-leave-active {
+	  transition: opacity .5s
+	}
+	.fade-enter, .fade-leave-active {
+	  opacity: 0
+	}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<!-- <button v-on:click="changeBol()">切换显示隐藏</button> -->
+		<button @click="changeBol()">切换显示隐藏</button>
+		<!-- 
+		v-if有更高的切换成本（dom操作）
+		v-show有更高的渲染成本(不管条件是否成立，都会先渲染)
+		 -->
+		<transition name="fade">
+			<div v-show="bol" class="div1">div1</div>
+		</transition>
+	</div>
+</body>
+<script type="text/javascript">
+	var vm = new Vue({
+		el:"#app",
+		data:{
+			bol: true
+		},
+		methods: {
+			changeBol:function (){
+				// 对bol进行取反
+				this.bol = !this.bol
+			}
+		}
+	})
+
+
+
+
+
+
+
+
+</script>
+</html>

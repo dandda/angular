@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ol>
+			<todo-item></todo-item>
+			<todo-item></todo-item>
+		</ol>
+	</div>
+</body>
+<script type="text/javascript">
+	// 定义全局组件
+	Vue.component("todo-item",{
+		// 定义模板内容，也就是html内容
+		template:"<li>这是一个代办事项<a href='###'>删除</a></li>"
+	})
+
+	var vm = new Vue({
+		el:"#app",
+		data:{
+			groceryList:[
+				{text:'蔬菜'},
+				{text:'起司'},
+				{text:'米饭'}
+			]
+		},
+		methods: {
+			
+		}
+	})
+
+
+
+
+
+
+
+
+</script>
+</html>

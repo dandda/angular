@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ol>
+			<todo-item v-for="(item,index) in groceryList" v-bind:todo="item.text" :todo-index="index"></todo-item>
+		</ol>
+	</div>
+</body>
+<script type="text/javascript">
+	// 定义全局组件
+	// todoItem中的大写I 到了html中要写成-i
+	Vue.component("todoItem",{
+		// 定义模板内容，也就是html内容
+		template:"<li>{{todo}}下标是:{{todoIndex}}<a href='###'>删除</a></li>",
+		// 定义该组件的属性
+		props: ["todo","todoIndex"]
+	})
+
+	// 父组件
+	var vm = new Vue({
+		el:"#app",
+		data:{
+			groceryList:[
+				{text:'蔬菜'},
+				{text:'起司'},
+				{text:'米饭'}
+			]
+		},
+		methods: {
+			
+		}
+	})
+
+
+
+
+
+
+
+
+</script>
+</html>

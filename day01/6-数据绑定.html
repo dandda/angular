@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<div id="app">
+		<!-- 默认是单向数据绑定的,对值进行修改不会影响到model数据 -->
+		<!-- <input type="text" v-bind:value="msg"> -->
+		<!-- v-model双向数据绑定,类似于ng的ng-model -->
+		<!-- v-model只能作用域表单元素 -->
+		<input type="text" v-model="msg">
+		{{msg}}
+	</div>
+</body>
+<script type="text/javascript">
+	var vm = new Vue({
+		el:"#app",
+		data:{
+			msg: "我是一些内容"
+		},
+		methods: {
+			
+		}
+	})
+
+
+
+
+
+
+
+
+</script>
+</html>

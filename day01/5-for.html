@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<li v-for="(item,index) in todos">
+				{{index}}:{{item.text}}
+			</li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+	var vm = new Vue({
+		el:"#app",
+		data:{
+			todos:[
+				{text:"学习javascript"},
+				{text:"学习vue"},
+				{text:"学习给小孩换尿片"}
+			]
+		},
+		methods: {
+			
+		}
+	})
+	document.onclick = function (){
+		vm.todos.push({
+			text:"打游戏"
+		})
+	}
+
+
+
+
+
+
+
+
+</script>
+</html>

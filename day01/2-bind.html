@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<span v-bind:title="message">查看你加载这个页面的时间可以通过鼠标移入到这段文字上</span>
+	</div>
+</body>
+<script type="text/javascript">
+	var vm = new Vue({
+		el:"#app",
+		data:{
+			message: "bye! angular!"
+		},
+		methods: {
+			
+		}
+	})
+
+
+
+
+
+
+
+
+</script>
+</html>

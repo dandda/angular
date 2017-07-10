@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style type="text/css">
+	#app button.active{
+		background-color: yellow;
+	}
+	#app div{
+		width: 200px;
+		height: 200px;
+		background-color: #ccc;
+		display: none;
+	}
+	#app div.active{
+		display: block;
+	}
+	</style>
+</head>
+<body>
+	<div id="app">
+		姓名： <input type="text" v-model="name"><br>
+		内容： <textarea v-model="content"></textarea><br>
+		<button @click="add()">提交</button><br>
+		<h1>显示留言</h1>
+		<ul>
+			<li v-for="(item,index) in arr">
+				<span>{{item.name}}</span>
+				<p>{{item.content}}<a href="###" @click="del(index)">删除</a></p>
+			</li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+
+	// 父组件
+	var vm = new Vue({
+		el:"#app",
+		data:{
+			// arr 留言数据
+			/*
+			{
+				name:'',
+				text:''
+			}
+			*/
+			name:'',
+			content:'',
+			arr: []
+		},
+		methods: {
+			add:function (){
+
+				var obj = {
+					name: this.name,
+					content: this.content
+				}
+				this.arr.push(obj)
+				this.name = ""
+				this.content = ""
+			},
+			del:function (index){
+
+				this.arr.splice(index,1)
+			}
+		},
+		// 计算属性
+		computed:{
+
+		},
+		// 监听属性的变化，当值发生改变的时候，执行对应的内容
+		watch:{
+			
+		}
+	})
+
+
+
+
+
+
+
+
+</script>
+</html>

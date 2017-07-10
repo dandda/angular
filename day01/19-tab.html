@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style type="text/css">
+	#app button.active{
+		background-color: yellow;
+	}
+	#app div{
+		width: 200px;
+		height: 200px;
+		background-color: #ccc;
+		display: none;
+	}
+	#app div.active{
+		display: block;
+	}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<!-- <button v-for="(item,index) in tabs" :class="{active:activeIndex==index}" @click="activeIndex=index"> -->
+		<button v-for="(item,index) in tabs" :class="{active:activeIndex==index}" @click="changeIndex(index)">
+			{{item.btn}}
+		</button>
+		<div v-for="(item,index) in tabs" :class="{active:activeIndex==index}">
+			{{item.content}}
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+
+	// 父组件
+	var vm = new Vue({
+		el:"#app",
+		data:{
+			tabs: [
+				{btn:"按钮1", content: "买菜", id:1},
+				{btn:"按钮2", content: "学习ng",id:2},
+				{btn:"按钮3", content: "打游戏",id:3}
+			],
+			activeIndex: 0
+		},
+		methods: {
+			changeIndex:function (index){
+				this.activeIndex = index
+			}
+		},
+		// 计算属性
+		computed:{
+
+		},
+		// 监听属性的变化，当值发生改变的时候，执行对应的内容
+		watch:{
+			
+		}
+	})
+
+
+
+
+
+
+
+
+</script>
+</html>
